@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,// checks if a request is coming from a frontend client (like a single-page application) and ensures that it is treated as a stateful request. Stateful requests maintain session data and cookies across requests, which is necessary for things like user authentication and CSRF.EnsureFrontendRequestsAreStateful checks if the request is from the frontend and ensures the CSRF token is present and valid.
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],

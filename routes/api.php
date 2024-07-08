@@ -14,10 +14,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::middleware('auth:sanctum')->group(function(){
+    Route::post('/logout',[AuthController::class,'logout']);
+});
+
+
+Route::get('/showuser',[AuthController::class,'show']);
+Route::post('/register',[AuthController::class,'register']); //kernel.php,cors.php,User.php,AuthController
+Route::post('/login',[AuthController::class,'login']);
+
+
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/showuser',[AuthController::class,'show']);
-Route::post('/register',[AuthController::class,'register']);

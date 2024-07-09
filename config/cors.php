@@ -32,6 +32,6 @@ return [
 
     'max_age' => 0, // This specifies whether user credentials (like cookies, HTTP authentication) can be included in CORS requests.true: Credentials are supported. This means cookies and HTTP authentication information will be included in requests.
 
-    'supports_credentials' => true,
+    'supports_credentials' => true, //it allows cookies and HTTP authentication to be included in CORS requests. This is necessary when you want to include user credentials in requests to another domain, such as sending cookies for session management.
 
 ];

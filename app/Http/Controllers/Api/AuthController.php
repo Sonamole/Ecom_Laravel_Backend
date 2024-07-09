@@ -75,9 +75,10 @@ class AuthController extends Controller
 
         else{
 
+
             $user = User::where('email', $request->email)->first();
 
-            if (! $user || ! Hash::check($request->password, $user->password)) {
+            if (! $user || ! Hash::check($request->password, $user->password)) { //It compares a plain-text password ($request->password) with a hashed password ($user->password) stored in the database.
                     return response()->json([
                         'status'=>401,
                         'message'=>'Invalid Credentials',
@@ -85,11 +86,23 @@ class AuthController extends Controller
             }
 
             else{
-                $token=$user->createToken($user->email, ['*'])->plainTextToken;
+
+                if($user->role_as ==1) //1=Admin
+                {
+                   $role='admin';
+                   $token= $user->createToken($user->email,['server:admin'])->plainTextToken; //['server:admin'] is an example of an ability. You can define any abilities you need, such as ['read', 'write'], to restrict what actions can be performed with this token.
+                }
+
+                else{
+                    $role='';
+                    $token=$user->createToken($user->email, [''])->plainTextToken;
+                }
+
                 return response()->json([
                  'status'=>200,
                  'username'=>$user->name,
                  'token'=>$token,
+                 'role'=>$role,
                  'message'=>'Logged in Successfully'
 
              ]);
@@ -98,16 +111,16 @@ class AuthController extends Controller
 }
 
 
-    // public function logout()
-    // {
-    //     auth()->user()->tokens()->delete();
-    //     return response()->json([
-    //         'status'=>200,
-    //         'message'=>'Logout Successfully'
+    public function logout(Request $request)
+    {
+        auth()->user()->tokens()->delete();
+        return response()->json([
+            'status'=>200,
+            'message'=>'Logout Successfully'
 
 
-    //     ]);
-    // }
+        ]);
+    }
 
 
 

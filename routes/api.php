@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,16 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){//ensure that
     Route::get('/edit-category/{id}',[CategoryController::class,'edit']);
     Route::put('/update-category/{id}',[CategoryController::class,'update']);
     Route::delete('/delete-category/{id}',[CategoryController::class,'destroy']);
+
+    //product section
+    Route::get('/all-category',[CategoryController::class,'allcategory']);
+    Route::post('/store-product',[ProductController::class,'store']);
+    Route::get('/view-product',[ProductController::class,'index']);
+    Route::get('/edit-product/{id}',[ProductController::class,'edit']);
+    Route::post('/update-product/{id}',[ProductController::class,'update']);
+
+
+
 });
 
 

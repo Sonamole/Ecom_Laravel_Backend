@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\API\FrontendController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -26,6 +27,12 @@ Route::post('/register',[AuthController::class,'register']); //kernel.php,cors.p
 Route::post('/login',[AuthController::class,'login']);
 Route::get('/getCategory',[FrontendController::class,'category']);
 Route::get('/fetchproducts/{slug}',[FrontendController::class,'product']);
+Route::get('/viewproductdetail/{category_slug}/{product_slug}',[FrontendController::class,'viewproduct']);
+Route::post('/add-to-cart',[CartController::class,'addtoCart']);
+Route::get('/cart',[CartController::class,'viewcart']);
+Route::put('/cart-updatequantity/{cart_id}/{scope}',[CartController::class,'updatequantity']);
+Route::delete('/delete-cartitem/{cart_id}',[CartController::class,'deleteCartitem']);
+
 
 
 

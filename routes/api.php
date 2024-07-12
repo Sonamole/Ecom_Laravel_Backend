@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\API\FrontendController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
@@ -23,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register',[AuthController::class,'register']); //kernel.php,cors.php,User.php,AuthController
 Route::post('/login',[AuthController::class,'login']);
+Route::get('/getCategory',[FrontendController::class,'category']);
+Route::get('/fetchproducts/{slug}',[FrontendController::class,'product']);
+
+
 
 
 Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){//ensure that only authenticated users can access it.This groups routes that require the auth:sanctum middleware. It means any route within this group will require the user to be authenticated using Laravel Sanctum.

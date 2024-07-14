@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
 
-    
+
     public function register(Request $request)
     {
         $validator=Validator::make($request->all(),[
@@ -35,7 +35,7 @@ class AuthController extends Controller
                 'email'=>$request->email,
                 'password'=>Hash::make($request->password)
             ]);
-//createToken is a method provided by Laravel's Sanctum package, which is used to generate API tokens.$user is an instance of the User model. The createToken method is called on this user instance to generate a new token.the user's email is used as the token name.The ['*'] value means the token has all abilities (full access).plainTextToken is a property of this instance that contains the actual token string in plain text format.
+           //createToken is a method provided by Laravel's Sanctum package, which is used to generate API tokens.$user is an instance of the User model. The createToken method is called on this user instance to generate a new token.the user's email is used as the token name.The ['*'] value means the token has all abilities (full access).plainTextToken is a property of this instance that contains the actual token string in plain text format.
            $token=$user->createToken($user->email, ['*'])->plainTextToken;
            return response()->json([
             'status'=>200,

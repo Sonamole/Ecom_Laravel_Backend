@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\API\FrontendController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Api\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::get('/cart',[CartController::class,'viewcart']);
 Route::put('/cart-updatequantity/{cart_id}/{scope}',[CartController::class,'updatequantity']);
 Route::delete('/delete-cartitem/{cart_id}',[CartController::class,'deleteCartitem']);
 
+Route::post('/validate-order',[CheckoutController::class,'validateorder']);
 Route::post('/place-order',[CheckoutController::class,'placeorder']);
 
 
@@ -50,6 +52,10 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){//ensure that
     Route::get('/edit-category/{id}',[CategoryController::class,'edit']);
     Route::put('/update-category/{id}',[CategoryController::class,'update']);
     Route::delete('/delete-category/{id}',[CategoryController::class,'destroy']);
+
+    //Orders
+    Route::get('/orders',[OrderController::class,'index']);
+
 
     //product section
     Route::get('/all-category',[CategoryController::class,'allcategory']);
